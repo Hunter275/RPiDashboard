@@ -1,1 +1,3 @@
-# Python Socket.IO Server
+# Socket.IO Server
+
+`node server.js`
