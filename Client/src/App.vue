@@ -1,0 +1,41 @@
+<script setup>
+import FooterItem from './components/FooterItem.vue'
+import HeaderItem from './components/HeaderItem.vue';
+import LogsListItem from './components/LogsListItem.vue'
+
+</script>
+
+<template>
+  <div class="page">
+    <HeaderItem class="header"></HeaderItem>
+    <LogsListItem class="logs"></LogsListItem>
+    <FooterItem class="footer"></FooterItem>
+  </div>
+</template>
+
+<style scoped>
+.header {
+  position: fixed;
+  width: 100%;
+}
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.logs {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  order: 1;
+  overflow: scroll;
+  padding-top: 5%;
+  padding-bottom: 25%;
+}
+.footer {
+  order: 2;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+</style>
