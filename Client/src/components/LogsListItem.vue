@@ -43,7 +43,7 @@ export default {
     let auth;
     try {
       // Try to pick up authentication after user logs in
-      auth = await getAuth({ hassUrl: "http://192.168.1.177:8123" });//, authCode: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI3YzM1ODIxYjliZTE0ZmE3ODRhZDNhMzllM2Q1N2RiNCIsImlhdCI6MTczNTE4NzYxNiwiZXhwIjoyMDUwNTQ3NjE2fQ.Z4-Sun6Znp2J2QVS1sMFDaJR-8oN-u6L11Jx7h4U9j4" });
+      auth = await getAuth({ hassUrl: "http://192.168.1.177:8123" });
     } catch (err) {
       if (err === ERR_HASS_HOST_REQUIRED) {
         const hassUrl = "http://192.168.1.177:8123";
