@@ -22,7 +22,9 @@ export default {
   async created() {
     this.logs = await getLatestLogs(10);
 
-    const entityWhitelist = [""]
+    const entityWhitelist = [""];
+    const typeWhiteList = ["switch", "light"];
+    const type = [""];
 
     const processHA = (ent) => {
       if (!this.ha) {
@@ -30,8 +32,8 @@ export default {
       }
       else {
         for (const e in this.ha) {
-          console.log(ent[e].entity_id);
-          if (entityWhitelist.includes(e)) {
+          //console.log(ent[e].entity_id);
+          if (entityWhitelist.includes(e) || typeWhiteList.includes(e.split(".")[0])) {
             if (this.ha[e].state !== ent[e].state) {
               this.logs.push({ id: this.logs.length, title: "Home Assistant", msg: `${ent[e].attributes.friendly_name} state changed to ${ent[e].state}` })
             }
