@@ -2,7 +2,6 @@
 import moment from 'moment';
 import LogItem from './LogItem.vue';
 import socket from '../socket';
-import homesocket from '../socket';
 import { getLatestLogs } from "../Services/LogService.js";
 import {
   getAuth,
@@ -24,7 +23,6 @@ export default {
 
     const entityWhitelist = [""];
     const typeWhiteList = ["switch", "light"];
-    const type = [""];
 
     const processHA = (ent) => {
       if (!this.ha) {
@@ -32,9 +30,8 @@ export default {
       }
       else {
         for (const e in this.ha) {
-          //console.log(ent[e].entity_id);
           if (entityWhitelist.includes(e) || typeWhiteList.includes(e.split(".")[0])) {
-            if (this.ha[e].state !== ent[e].state) {
+            if (this.ha[e].state !== ent[e].state && this.ha[e].state !== "unavailable") {
               this.logs.push({ id: this.logs.length, title: "Home Assistant", msg: `${ent[e].attributes.friendly_name} state changed to ${ent[e].state}` })
             }
           }
@@ -46,7 +43,7 @@ export default {
     let auth;
     try {
       // Try to pick up authentication after user logs in
-      auth = await getAuth();
+      auth = await getAuth({ hassUrl: "http://192.168.1.177:8123" });//, authCode: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI3YzM1ODIxYjliZTE0ZmE3ODRhZDNhMzllM2Q1N2RiNCIsImlhdCI6MTczNTE4NzYxNiwiZXhwIjoyMDUwNTQ3NjE2fQ.Z4-Sun6Znp2J2QVS1sMFDaJR-8oN-u6L11Jx7h4U9j4" });
     } catch (err) {
       if (err === ERR_HASS_HOST_REQUIRED) {
         const hassUrl = "http://192.168.1.177:8123";
