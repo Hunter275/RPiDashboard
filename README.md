@@ -7,4 +7,4 @@ Goals
 * Network map (either fixed or dynamic) ⏳
 * Volume control for desktop PC ⏳
 * Media control (play/pause) for desktop PC ⏳
-* Multiplage navigation ⏳
+* Multi-page navigation ⏳
