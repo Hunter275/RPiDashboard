@@ -22,6 +22,7 @@ import LogsListItem from './components/LogsListItem.vue'
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-color: rgb(31, 35, 40);
 }
 .logs {
   display: flex;

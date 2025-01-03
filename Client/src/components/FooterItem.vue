@@ -15,7 +15,7 @@ import ButtonItem from './ButtonItem.vue';
 .buttons {
     display: flex;
     justify-content: space-between;
-    background-color: rgb(100, 100, 100);
+    background-color: rgb(46, 46, 46);
     padding: 2% 2% 2% 2%;
     color: white;
 }

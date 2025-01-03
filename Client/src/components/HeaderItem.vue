@@ -11,8 +11,8 @@ import moment from 'moment';
 .header {
   display: flex;
   justify-content: center;
-  background-color: rgb(140, 140, 140);;
-  color: black;
+  background-color: rgb(46, 46, 46);
+  color: white;
   font-size: 1.5rem;
 }
 </style>
