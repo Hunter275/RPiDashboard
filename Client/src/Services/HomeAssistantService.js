@@ -5,9 +5,9 @@ import {
 } from "home-assistant-js-websocket";
 
 const toggle = (entity_id) => {
-	let url = "/api/services/switch/toggle";
+	let url = "http://192.168.1.177:8123/api/services/switch/toggle";
 	if (entity_id.includes("light")) {
-		url = "/api/services/light/toggle";
+		url = "http://192.168.1.177:8123/api/services/light/toggle";
 	}
 	fetch(url, {
 		method: "POST",
@@ -29,7 +29,7 @@ const toggle = (entity_id) => {
 };
 
 const getState = async (entity_id) => {
-	const url = `/api/states/${entity_id}`;
+	const url = `http://192.168.1.177:8123/api/states/${entity_id}`;
 	const response = await fetch(url, {
 		method: "GET",
 		credentials: "include",
