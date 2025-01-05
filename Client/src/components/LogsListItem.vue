@@ -5,6 +5,7 @@ import socket from '../socket';
 import { getLatestLogs } from "../Services/LogService.js";
 import {
   getAuth,
+  createLongLivedTokenAuth,
   createConnection,
   subscribeEntities,
   ERR_HASS_HOST_REQUIRED,
@@ -42,11 +43,12 @@ export default {
 
     let auth;
     try {
+      const hassUrl = "http://192.168.1.177:8123";
       // Try to pick up authentication after user logs in
-      auth = await getAuth({ hassUrl: "http://192.168.1.177:8123" });
+      //auth = await getAuth({ hassUrl: "http://192.168.1.177:8123", authCode: import.meta.env.VITE_HATOKEN });
+      auth = createLongLivedTokenAuth(hassUrl, import.meta.env.VITE_HATOKEN)
     } catch (err) {
       if (err === ERR_HASS_HOST_REQUIRED) {
-        const hassUrl = "http://192.168.1.177:8123";
         // Redirect user to log in on their instance
         auth = await getAuth({ hassUrl });
       } else {
