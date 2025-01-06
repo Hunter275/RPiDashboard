@@ -14,8 +14,8 @@ console.log(props.ha);
 
 <template>
     <div class="buttons">
-        <ButtonItem icon="Lightbulb" :isEnabled="props.ha !== null" entity="light.hunters_office"></ButtonItem>
-        <ButtonItem icon="Lamp" v-if="props.ha.value !== null" :isEnabled="props.ha.value[entity].state === 'on'" entity="switch.hunters_office_lamp_switch_0"></ButtonItem>
+        <ButtonItem icon="Lightbulb" :isEnabled="false" entity="light.hunters_office"></ButtonItem>
+        <ButtonItem icon="Lamp" :isEnabled="false" entity="switch.hunters_office_lamp_switch_0"></ButtonItem>
         <ButtonItem icon="CoachLamp" :isEnabled="false" entity="light.porch"></ButtonItem>
         <ButtonItem icon="DeskLamp" :isEnabled="false" entity="switch.red_lamp_switch_0"></ButtonItem>
     </div>
