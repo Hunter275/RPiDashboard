@@ -47,20 +47,20 @@ const convertedDate = computed(() => {
     order: 0
 }
 .title {
-    color: rgb(153, 153, 153);
+    color: white;
     order: 0;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 2rem;
     flex-grow: 1;
 }
 .date {
-    color: rgb(180, 180, 180);
+    color: white;
     order: 1;
     font-size: 1rem;
     align-content: center;
 }
 .msg {
-    color: rgb(120, 120, 120);
+    color: white;
     order: 1;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1.4rem;
