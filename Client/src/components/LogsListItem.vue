@@ -1,79 +1,15 @@
-<script>
-import moment from 'moment';
+<script setup>
 import LogItem from './LogItem.vue';
-import socket from '../socket';
-import { getLatestLogs } from "../Services/LogService.js";
-import {
-  getAuth,
-  createLongLivedTokenAuth,
-  createConnection,
-  subscribeEntities,
-  ERR_HASS_HOST_REQUIRED,
-} from "home-assistant-js-websocket";
+import { computed } from 'vue';
 
-export default {
-  data() {
-    return {
-      logs: [],
-      ha: null,
-      newMessage: ''
-    };
-  },
-  async created() {
-    this.logs = await getLatestLogs(10);
-
-    const entityWhitelist = [""];
-    const typeWhiteList = ["switch", "light"];
-
-    const processHA = (ent) => {
-      if (!this.ha) {
-        this.ha = ent;
-      }
-      else {
-        for (const e in this.ha) {
-          if (entityWhitelist.includes(e) || typeWhiteList.includes(e.split(".")[0])) {
-            if (this.ha[e].state !== ent[e].state && this.ha[e].state !== "unavailable") {
-              this.logs.push({ id: this.logs.length, title: "Home Assistant", msg: `${ent[e].attributes.friendly_name} state changed to ${ent[e].state}` })
-            }
-          }
-        }
-        this.ha = ent;
-      }
-    }
-
-    let auth;
-    try {
-      const hassUrl = "http://192.168.1.177:8123";
-      // Try to pick up authentication after user logs in
-      //auth = await getAuth({ hassUrl: "http://192.168.1.177:8123", authCode: import.meta.env.VITE_HATOKEN });
-      auth = createLongLivedTokenAuth(hassUrl, import.meta.env.VITE_HATOKEN)
-    } catch (err) {
-      if (err === ERR_HASS_HOST_REQUIRED) {
-        // Redirect user to log in on their instance
-        auth = await getAuth({ hassUrl });
-      } else {
-        alert(`Unknown error: ${err}`);
-        return;
-      }
-    }
-    const connection = await createConnection({ auth });
-    subscribeEntities(connection, (ent) => processHA(ent));
-
-    socket.on('log', (log) => {
-      const parsedLog = JSON.parse(log);
-      parsedLog.id = this.logs.length;
-      this.logs.push(parsedLog);
-    });
-  },
-  methods: {
-    createLog() {
-      if (this.newMessage.trim() !== '') {
-        socket.emit('log', this.newMessage);
-        this.newMessage = '';
-      }
-    }
+const props = defineProps({
+  logs: {
+    type: Array,
+    required: true,
   }
-};
+})
+
+
 </script>
 
 <template>
@@ -84,7 +20,7 @@ export default {
       :title = "log.title"
       :msg = "log.msg"
       :date = "log.date"
-      @remove="logs.splice(index, 1)"
+      @remove="props.logs.splice(index, 1)"
     ></LogItem>
   </div>
 </template>

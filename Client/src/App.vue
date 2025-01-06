@@ -1,4 +1,5 @@
 <script setup>
+import ContentItem from './components/ContentItem.vue';
 import FooterItem from './components/FooterItem.vue'
 import HeaderItem from './components/HeaderItem.vue';
 import LogsListItem from './components/LogsListItem.vue'
@@ -7,9 +8,7 @@ import LogsListItem from './components/LogsListItem.vue'
 
 <template>
   <div class="page">
-    <HeaderItem class="header"></HeaderItem>
-    <LogsListItem class="logs"></LogsListItem>
-    <FooterItem class="footer"></FooterItem>
+    <ContentItem></ContentItem>
   </div>
 </template>
 
